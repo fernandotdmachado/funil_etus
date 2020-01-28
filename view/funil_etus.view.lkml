@@ -6,7 +6,14 @@ view: funil_etus {
       WHEN page_path LIKE '%cartao-de-credito-bmg-card%' THEN 'BMG CARD'
       WHEN (page_path LIKE '%super-digital%' OR page_path LIKE '%superdigital%') THEN 'SUPER DIGITAL'
       WHEN page_path LIKE '%nubank%' THEN 'NUBANK'
-      END AS BANCO, source AS SOURCE,
+      END AS BANCO,
+      CASE WHEN (source LIKE '%facebok%' OR source LIKE '%Facebok%') THEN 'FACEBOOK'
+      WHEN (source LIKE '%google%' OR source LIKE '%youtube%') THEN 'GOOGLE'
+      WHEN source LIKE '%taboola%' THEN 'TABOOLA'
+      WHEN source LIKE '%outbrain%' THEN 'OUTBRAIN'
+      WHEN source LIKE '%newsletter%' THEN 'NEWSLETTER'
+      WHEN source LIKE '%xandr%' THEN 'XANDR'
+      ELSE 'OUTROS' END AS SOURCE,
       CASE WHEN (page_path = 'unum.com.br/cartao-de-credito-c6-bank/'
       OR page_path = 'unum.com.br/cartao-de-credito-consignado-bmg/'
       OR page_path = 'unum.com.br/cartao-de-credito-bmg-card/'
@@ -21,7 +28,7 @@ view: funil_etus {
       FROM `etusbg.ga.ga_total`
 
       WHERE date >= '2020-01-01'
-      --AND source IN ('google', 'facebook', 'solicitar-cartao', 'taboola', 'outbrain')
+      AND source NOT IN ('solicitar-cartao')
       AND (page_path = 'unum.com.br/cartao-de-credito-c6-bank/'
       OR page_path = 'unum.com.br/cartao-de-credito-consignado-bmg/'
       OR page_path = 'unum.com.br/cartao-de-credito-bmg-card/'
