@@ -7,7 +7,7 @@ view: funil_etus {
       WHEN (page_path LIKE '%super-digital%' OR page_path LIKE '%superdigital%') THEN 'SUPER DIGITAL'
       WHEN page_path LIKE '%nubank%' THEN 'NUBANK'
       END AS BANCO,
-      CASE WHEN (source LIKE '%facebok%' OR source LIKE '%Facebok%') THEN 'FACEBOOK'
+      CASE WHEN (source LIKE '%facebook%' OR source LIKE '%Facebook%') THEN 'FACEBOOK'
       WHEN (source LIKE '%google%' OR source LIKE '%youtube%') THEN 'GOOGLE'
       WHEN source LIKE '%taboola%' THEN 'TABOOLA'
       WHEN source LIKE '%outbrain%' THEN 'OUTBRAIN'
@@ -25,7 +25,7 @@ view: funil_etus {
       OR page_path = 'unum.com.br/solicitar-cartao-de-credito-nubank/') THEN 2
       ELSE 3 END AS PASSO
 
-      FROM `etusbg.ga.ga_total`
+      FROM `etusbg.ga.ga_360_total`
 
       WHERE date >= '2020-01-01'
       AND source NOT IN ('solicitar-cartao')
